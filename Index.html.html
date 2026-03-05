@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Orissa Law Times – Vintage Edition</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #e8e2d3 url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+    font-family: "Courier New", Courier, monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.paper {
+    width: 850px;
+    background: #fffdf5;
+    padding: 60px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    border: 1px solid #c8bfae;
+    position: relative;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    text-align: center;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #000;
+    margin: 25px 0;
+}
+
+#text {
+    line-height: 1.8;
+    font-size: 16px;
+    white-space: pre-wrap;
+}
+
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 18px;
+    background: #000;
+    margin-left: 4px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+}
+</style>
+</head>
+
+<body>
+
+<div class="paper">
+    <h1>ORISSA LAW TIMES</h1>
+    <div class="subtitle">Editorial Typewriter Edition</div>
+    <hr>
+
+    <div id="text"></div><span class="cursor"></span>
+
+    <div class="footer">
+        “To Inform. To Examine. To Endure.”
+    </div>
+</div>
+
+<audio id="typeSound" src="https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3" preload="auto"></audio>
+
+<script>
+const content = `
+The Orissa Law Times stands as a distinguished and enduring voice within the legal community of Odisha.
+
+It provides comprehensive coverage of judicial pronouncements, legislative amendments, and policy developments at both the State and National levels.
+
+Each edition is carefully curated to include case law updates, scholarly commentary, and analytical insights that guide practitioners, scholars, and students alike.
+
+In an evolving legal landscape, the commitment to accuracy, integrity, and intellectual rigor remains paramount.
+`;
+
+let i = 0;
+const speed = 35;
+const textElement = document.getElementById("text");
+const sound = document.getElementById("typeSound");
+
+function typeWriter() {
+    if (i < content.length) {
+        textElement.innerHTML += content.charAt(i);
+        sound.currentTime = 0;
+        sound.play();
+        i++;
+        setTimeout(typeWriter, speed);
+    } else {
+        setTimeout(restartTyping, 4000);
+    }
+}
+
+function restartTyping() {
+    textElement.innerHTML = "";
+    i = 0;
+    typeWriter();
+}
+
+window.onload = typeWriter;
+</script>
+
+</body>
+</html>
